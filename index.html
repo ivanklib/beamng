@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BeamNG.drive — Реалистичный симулятор</title>
-    <meta name="description" content="Обзор BeamNG.drive — симулятор с реальной физикой, модами и краш-тестами.">
-    <meta name="keywords" content="BeamNG.drive, симулятор, физика, моды, краш-тест, Steam">
+    <meta name="description" content="BeamNG.drive — симулятор с идеальной физикой, модами и краш-тестами. Обзор, плюсы, минусы, видео.">
+    <meta name="keywords" content="BeamNG.drive, симулятор, физика, моды, краш-тест, видео, обзор">
     <meta property="og:title" content="BeamNG.drive — Идеальная физика в игре">
-    <meta property="og:description" content="Машины гнутся, ломаются, ездят по-настоящему.">
+    <meta property="og:description" content="Машины гнутся, ломаются, ведут себя как в жизни. Смотри видео и переходи в Steam.">
     <meta property="og:image" content="screenshot_2025-10-11_18-50-021.png">
     <meta property="og:url" content="https://ваше_имя.github.io/beamng">
     <meta name="twitter:card" content="summary_large_image">
@@ -75,19 +75,25 @@
             background: #0d8bee;
             transform: scale(1.05);
         }
-        .lang-switch {
-            text-align: center;
-            margin: 20px auto;
-            font-size: 1.1em;
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px auto;
+            max-width: 1000px;
         }
-        .lang-switch a {
-            color: #FFA500;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
+        .video-item {
+            flex: 1 1 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            background: #000;
         }
-        .lang-switch a:hover {
-            text-decoration: underline;
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         .footer {
             text-align: center;
@@ -103,111 +109,92 @@
             h1 {
                 font-size: 2.2em;
             }
-            .lang-switch {
-                font-size: 1em;
-            }
         }
     </style>
 </head>
 <body>
-
-    <!-- Переключатель языка -->
-    <div class="lang-switch">
-        <a href="#ru" onclick="setLang('ru')">🇷🇺 Русский</a> |
-        <a href="#en" onclick="setLang('en')">🇬🇧 English</a>
-    </div>
-
     <div class="text-block">
         <h1>BeamNG<font color="#FFA500">.drive</font></h1>
 
-        <p>
-            <span class="text" data-ru="Реалистичный симулятор с идеальной физикой." data-en="Realistic simulator with perfect physics.">Реалистичный симулятор с идеальной физикой.</span>
-            <span class="text" data-ru="Машины гнутся, ломаются, ведут себя как в жизни. Бесконечные аварии, моды, песочница. Идеально для краш-тестов и абсурдных экспериментов." 
-                  data-en="Cars bend, break, and behave like in real life. Endless crashes, mods, sandbox. Perfect for crash tests and absurd experiments.">
-                Машины гнутся, ломаются, ведут себя как в жизни. Бесконечные аварии, моды, песочница. Идеально для краш-тестов и абсурдных экспериментов.
-            </span>
-        </p>
+        <p><strong>Реалистичный симулятор с идеальной физикой.</strong> Машины гнутся, ломаются, ведут себя как в жизни. Бесконечные аварии, моды, песочница. Идеально для краш-тестов и абсурдных экспериментов.</p>
 
-        <h2><span class="text" data-ru="🎮 Что ещё интересного в игре:" data-en="🎮 What else is interesting in the game:">🎮 Что ещё интересного в игре:</span></h2>
+        <h2>🎮 Что ещё интересного в игре:</h2>
         <ul>
-            <li><strong><span class="text" data-ru="Технологическое чудо" data-en="Technological miracle">Технологическое чудо</span></strong> — <span class="text" data-ru="движок soft-body, где каждая деталь машины просчитывается отдельно" data-en="soft-body engine, each part of the car is calculated separately">движок soft-body, где каждая деталь машины просчитывается отдельно</span></li>
-            <li><strong><span class="text" data-ru="Реальное повреждение" data-en="Real damage">Реальное повреждение</span></strong> — <span class="text" data-ru="вмятины, сломанные оси, оторванные двери, вытекающий бензин" data-en="dents, broken axles, torn doors, leaking fuel">вмятины, сломанные оси, оторванные двери, вытекающий бензин</span></li>
-            <li><strong><span class="text" data-ru="Для контент-мейкеров" data-en="For content creators">Для контент-мейкеров</span></strong> — <span class="text" data-ru="встроенный рекордер с замедлением, редактор сценариев для съёмки фильмов" data-en="built-in slow-motion recorder, scenario editor for filming">встроенный рекордер с замедлением, редактор сценариев для съёмки фильмов</span></li>
-            <li><strong><span class="text" data-ru="Для инженеров" data-en="For engineers">Для инженеров</span></strong> — <span class="text" data-ru="тонкая настройка узлов (развал-схождение, подвеска), Telemetry API для сбора данных" data-en="fine-tuning of nodes (camber, suspension), Telemetry API for data collection">тонкая настройка узлов (развал-схождение, подвеска), Telemetry API для сбора данных</span></li>
-            <li><strong><span class="text" data-ru="Скрытые пасхалки" data-en="Hidden easter eggs">Скрытые пасхалки</span></strong> — <span class="text" data-ru="летающие тарелки, секретные локации на картах" data-en="flying saucers, secret locations on maps">летающие тарелки, секретные локации на картах</span></li>
-            <li><strong><span class="text" data-ru="Кросс-платформенные моды" data-en="Cross-platform mods">Кросс-платформенные моды</span></strong> — <span class="text" data-ru="машины из Forza, Assetto Corsa" data-en="cars from Forza, Assetto Corsa">машины из Forza, Assetto Corsa</span></li>
-            <li><strong><span class="text" data-ru="Режим «Автомир»" data-en="«Traffic World» mode">Режим «Автомир»</span></strong> — <span class="text" data-ru="наблюдайте, как ИИ-машины живут своей жизнью" data-en="watch how AI cars live their own lives">наблюдайте, как ИИ-машины живут своей жизнью</span></li>
-            <li><strong><span class="text" data-ru="Целые игры внутри игры" data-en="Mini-games inside the game">Целые игры внутри игры</span></strong> — <span class="text" data-ru="гонки на выживание, паркур, футбол машинами" data-en="survival races, parkour, football with cars">гонки на выживание, паркур, футбол машинами</span></li>
+            <li><strong>Технологическое чудо</strong> — движок soft-body, где каждая деталь машины просчитывается отдельно</li>
+            <li><strong>Реальное повреждение</strong> — вмятины, сломанные оси, оторванные двери, вытекающий бензин</li>
+            <li><strong>Для контент-мейкеров</strong> — встроенный рекордер с замедлением, редактор сценариев для съёмки фильмов</li>
+            <li><strong>Для инженеров</strong> — тонкая настройка узлов (развал-схождение, подвеска), Telemetry API для сбора данных</li>
+            <li><strong>Скрытые пасхалки</strong> — летающие тарелки, секретные локации на картах</li>
+            <li><strong>Кросс-платформенные моды</strong> — машины из Forza, Assetto Corsa</li>
+            <li><strong>Режим «Автомир»</strong> — наблюдайте, как ИИ-машины живут своей жизнью</li>
+            <li><strong>Целые игры внутри игры</strong> — гонки на выживание, паркур, футбол машинами</li>
         </ul>
 
-        <h2><span class="text" data-ru="✅ Плюсы BeamNG.drive:" data-en="✅ Pros of BeamNG.drive:">✅ Плюсы BeamNG.drive:</span></h2>
+        <h2>✅ Плюсы BeamNG.drive:</h2>
         <ul>
-            <li><span class="text" data-ru="Лучшая в мире физика разрушений" data-en="Best crash physics in the world">Лучшая в мире физика разрушений</span></li>
-            <li><span class="text" data-ru="Полная свобода действий — делай что хочешь" data-en="Complete freedom — do whatever you want">Полная свобода действий — делай что хочешь</span></li>
-            <li><span class="text" data-ru="Бесконечные моды (тысячи машин, карт, сценариев)" data-en="Endless mods (thousands of cars, maps, scenarios)">Бесконечные моды (тысячи машин, карт, сценариев)</span></li>
-            <li><span class="text" data-ru="Реалистичное вождение с ощущением веса и сцепления" data-en="Realistic driving with feel of weight and grip">Реалистичное вождение с ощущением веса и сцепления</span></li>
-            <li><span class="text" data-ru="Инструмент для творчества — съёмка роликов, создание сценариев" data-en="Creative tool — filming videos, creating scenarios">Инструмент для творчества — съёмка роликов, создание сценариев</span></li>
-            <li><span class="text" data-ru="Постоянно развивается — разработчики добавляют контент годами" data-en="Constantly evolving — developers add content for years">Постоянно развивается — разработчики добавляют контент годами</span></li>
-            <li><span class="text" data-ru="Образовательный потенциал — изучение физики, основ ПДД" data-en="Educational potential — learning physics, traffic rules">Образовательный потенциал — изучение физики, основ ПДД</span></li>
-            <li><span class="text" data-ru="Уникальный геймплей — аналогов с такой детализацией нет" data-en="Unique gameplay — no analogs with such detail">Уникальный геймплей — аналогов с такой детализацией нет</span></li>
-            <li><span class="text" data-ru="ИИ-трафик — живой мир вокруг, можно просто наблюдать" data-en="AI traffic — a living world around, you can just watch">ИИ-трафик — живой мир вокруг, можно просто наблюдать</span></li>
-            <li><span class="text" data-ru="Технический восторг — восхищение технологией «мягких тел»" data-en="Technical marvel — amazement at the soft-body technology">Технический восторг — восхищение технологией «мягких тел»</span></li>
+            <li>Лучшая в мире физика разрушений</li>
+            <li>Полная свобода действий — делай что хочешь</li>
+            <li>Бесконечные моды (тысячи машин, карт, сценариев)</li>
+            <li>Реалистичное вождение с ощущением веса и сцепления</li>
+            <li>Инструмент для творчества — съёмка роликов, создание сценариев</li>
+            <li>Постоянно развивается — разработчики добавляют контент годами</li>
+            <li>Образовательный потенциал — изучение физики, основ ПДД</li>
+            <li>Уникальный геймплей — аналогов с такой детализацией нет</li>
+            <li>ИИ-трафик — живой мир вокруг, можно просто наблюдать</li>
+            <li>Технический восторг — восхищение технологией «мягких тел»</li>
         </ul>
 
-        <h2><span class="text" data-ru="❌ Существенные минусы BeamNG.drive:" data-en="❌ Major downsides of BeamNG.drive:">❌ Существенные минусы BeamNG.drive:</span></h2>
+        <h2>❌ Существенные минусы BeamNG.drive:</h2>
         <ol>
-            <li><strong><span class="text" data-ru="Требовательна к железу" data-en="Demands powerful hardware">Требовательна к железу</span></strong> — <span class="text" data-ru='даже мощные ПК иногда "тормозят"' data-en="even powerful PCs sometimes lag">даже мощные ПК иногда "тормозят"</span></li>
-            <li><strong><span class="text" data-ru="Нет сюжета" data-en="No storyline">Нет сюжета</span></strong> — <span class="text" data-ru="чистая песочница без сценария" data-en="pure sandbox without a plot">чистая песочница без сценария</span></li>
-            <li><strong><span class="text" data-ru="Сложна для новичков" data-en="Hard for beginners">Сложна для новичков</span></strong> — <span class="text" data-ru="тонны настроек и модов" data-en="tons of settings and mods">тонны настроек и модов</span></li>
-            <li><strong><span class="text" data-ru="Сетевой режим" data-en="Multiplayer mode">Сетевой режим</span></strong> — <span class="text" data-ru="только через моды (не официальный)" data-en="only via mods (not official)">только через моды (не официальный)</span></li>
-            <li><strong><span class="text" data-ru="Проблемы с оптимизацией" data-en="Optimization issues">Проблемы с оптимизацией</span></strong> — <span class="text" data-ru="зависания на больших картах" data-en="freezes on large maps">зависания на больших картах</span></li>
-            <li><strong><span class="text" data-ru="Сложная установка модов" data-en="Hard mod installation">Сложная установка модов</span></strong> — <span class="text" data-ru="репозитории, зависимости" data-en="repositories, dependencies">репозитории, зависимости</span></li>
-            <li><strong><span class="text" data-ru="Нет лицензионных машин" data-en="No licensed cars">Нет лицензионных машин</span></strong> — <span class="text" data-ru="все моды фанатские" data-en="all mods are fan-made">все моды фанатские</span></li>
-            <li><strong><span class="text" data-ru="Много багов" data-en="Many bugs">Много багов</span></strong> — <span class="text" data-ru="в пользовательском контенте" data-en="in user-generated content">в пользовательском контенте</span></li>
+            <li><strong>Требовательна к железу</strong> — даже мощные ПК иногда "тормозят"</li>
+            <li><strong>Нет сюжета</strong> — чистая песочница без сценария</li>
+            <li><strong>Сложна для новичков</strong> — тонны настроек и модов</li>
+            <li><strong>Сетевой режим</strong> — только через моды (не официальный)</li>
+            <li><strong>Проблемы с оптимизацией</strong> — зависания на больших картах</li>
+            <li><strong>Сложная установка модов</strong> — репозитории, зависимости</li>
+            <li><strong>Нет лицензионных машин</strong> — все моды фанатские</li>
+            <li><strong>Много багов</strong> в пользовательском контенте</li>
         </ol>
 
-        <h2><span class="text" data-ru="📊 Цифры для впечатления:" data-en="📊 Impressive numbers:">📊 Цифры для впечатления:</span></h2>
+        <h2>📊 Цифры для впечатления:</h2>
         <ul>
-            <li><strong>500+</strong> <span class="text" data-ru="машин в Workshop Steam" data-en="cars in Steam Workshop">машин в Workshop Steam</span></li>
-            <li><strong>100+</strong> <span class="text" data-ru="карт разного масштаба" data-en="maps of various sizes">карт разного масштаба</span></li>
-            <li><strong>10 <span class="text" data-ru="лет" data-en="years">лет</span></strong> <span class="text" data-ru="разработки (в раннем доступе с 2015)" data-en="of development (Early Access since 2015)">разработки (в раннем доступе с 2015)</span></li>
-            <li><strong>95%</strong> <span class="text" data-ru="положительных отзывов в Steam" data-en="positive reviews on Steam">положительных отзывов в Steam</span></li>
-            <li><strong><span class="text" data-ru="Миллионы" data-en="Millions">Миллионы</span></strong> <span class="text" data-ru="фанатов по всему миру" data-en="fans worldwide">фанатов по всему миру</span></li>
+            <li><strong>500+</strong> машин в Workshop Steam</li>
+            <li><strong>100+</strong> карт разного масштаба</li>
+            <li><strong>10 лет</strong> разработки (в раннем доступе с 2015)</li>
+            <li><strong>95%</strong> положительных отзывов в Steam</li>
+            <li><strong>Миллионы</strong> фанатов по всему миру</li>
         </ul>
 
-        <p><em>
-            <span class="text" data-ru="Философия игры: Это цифровой песочный стол с моделями машин, где ты одновременно и ребёнок, и каскадёр, и инженер-испытатель." 
-                  data-en="Game philosophy: A digital sandbox with car models where you're a child, a stuntman, and a test engineer at once.">
-                Философия игры: Это цифровой песочный стол с моделями машин, где ты одновременно и ребёнок, и каскадёр, и инженер-испытатель.
-            </span>
-        </em></p>
+        <p><em>Философия игры: Это цифровой песочный стол с моделями машин, где ты одновременно и ребёнок, и каскадёр, и инженер-испытатель.</em></p>
 
         <!-- Кнопка Steam -->
-        <a href="https://store.steampowered.com/app/284160/BeamNG_drive/" target="_blank" class="btn">
-            <span class="text" data-ru="🎮 Перейти в Steam" data-en="🎮 Go to Steam">🎮 Перейти в Steam</span>
-        </a>
+        <a href="https://store.steampowered.com/app/284160/BeamNG_drive/" target="_blank" class="btn">🎮 Перейти в Steam</a>
+    </div>
+
+    <!-- Блок с видео -->
+    <div class="video-container">
+        <div class="video-item">
+            <video autoplay muted loop playsinline>
+                <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/e32b86262102fcbb1b903f9036351865.webm?t=1765018126" type="video/webm">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+        <div class="video-item">
+            <video autoplay muted loop playsinline>
+                <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/582c66d693899fbba5344b899c50c681.webm?t=1765018126" type="video/webm">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+        <div class="video-item">
+            <video autoplay muted loop playsinline>
+                <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/53cfb9a4ce25254fc0ab7c2bf66e52b1.webm?t=1765018126" type="video/webm">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
     </div>
 
     <div class="footer">
-        <span class="text" data-ru="&copy; 2025 | Fan-site BeamNG.drive | Неофициальный ресурс" data-en="&copy; 2025 | Fan-site BeamNG.drive | Unofficial resource">
-            &copy; 2025 | Fan-site BeamNG.drive | Неофициальный ресурс
-        </span>
+        &copy; 2025 | Fan-site BeamNG.drive | Неофициальный ресурс
     </div>
-
-    <!-- Скрипт переключения языка -->
-    <script>
-        function setLang(lang) {
-            document.querySelectorAll('.text').forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if (text) el.textContent = text;
-            });
-            localStorage.setItem('site-lang', lang);
-        }
-
-        window.onload = () => {
-            const saved = localStorage.getItem('site-lang') || 'ru';
-            setLang(saved);
-        };
-    </script>
 </body>
 </html>
