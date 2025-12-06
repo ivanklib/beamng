@@ -19,60 +19,81 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             background: url('screenshot_2025-10-11_18-50-021.png') fixed center;
             background-size: cover;
-            margin: 0;
-            padding: 20px;
             font-family: 'Roboto', Arial, sans-serif;
-            min-height: 100vh;
             color: #fff;
+            margin-top: 70vh; /* Отступ для видео */
         }
-        .video-header {
+        
+        /* ВИДЕО САМОЕ ВЕРХНЕЕ - ФИКСИРОВАННОЕ */
+        .top-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70vh; /* 70% высоты экрана */
+            z-index: 1000;
+            object-fit: cover; /* Заполняет весь блок */
+        }
+        
+        /* Наложение поверх видео для лучшей читаемости текста */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+            z-index: 1001;
+            pointer-events: none; /* Клики проходят сквозь */
+        }
+        
+        .content {
             position: relative;
-            width: 100%;
-            max-width: 1000px;
-            margin: 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
-            background: #000;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 20px 20px 0 0;
+            padding: 40px 20px;
+            margin-top: -30px; /* Наложение на видео */
         }
-        .main-video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 12px;
-        }
+        
         .text-block {
-            background: rgba(0, 0, 0, 0.75);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
             max-width: 1000px;
-            margin: 40px auto;
+            margin: 0 auto;
             line-height: 1.6;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
         }
+        
         h1 {
-            margin-top: 0;
             text-align: center;
             margin-bottom: 30px;
             font-size: 2.8em;
             color: #FFA500;
         }
+        
         h2 {
             color: #FFA500;
             border-bottom: 1px solid #FFA500;
             padding-bottom: 5px;
+            margin: 25px 0 15px 0;
         }
+        
         ul, ol {
             margin-bottom: 25px;
             padding-left: 20px;
         }
+        
         li {
             margin-bottom: 8px;
         }
+        
         .btn {
             display: block;
             width: 300px;
@@ -87,10 +108,12 @@
             transition: 0.3s;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
+        
         .btn:hover {
             background: #0d8bee;
             transform: scale(1.05);
         }
+        
         .video-container {
             display: flex;
             flex-wrap: wrap;
@@ -99,6 +122,7 @@
             margin: 40px auto;
             max-width: 1000px;
         }
+        
         .video-item {
             flex: 1 1 300px;
             border-radius: 10px;
@@ -106,221 +130,166 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
             background: #000;
         }
+        
         video {
             width: 100%;
             height: auto;
             display: block;
         }
+        
         .footer {
             text-align: center;
             margin-top: 40px;
             color: rgba(255,255,255,0.7);
             font-size: 0.9em;
+            padding: 20px;
         }
-        .video-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(0,0,0,0.7);
-            border-radius: 0 0 12px 12px;
-        }
-        .video-controls button {
-            background: #333;
-            color: white;
-            border: 1px solid #FF8C00;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Roboto', sans-serif;
-        }
-        .video-controls button:hover {
-            background: #FF8C00;
-            color: black;
-        }
-        .video-title {
-            text-align: center;
-            background: rgba(255,140,0,0.9);
-            color: black;
-            padding: 10px;
-            margin: 0;
-            font-weight: bold;
-            border-radius: 12px 12px 0 0;
-        }
+        
+        /* Прокрутка поверх видео */
         @media (max-width: 768px) {
-            .video-header {
-                margin: 10px;
+            body {
+                margin-top: 50vh;
             }
-            .main-video {
-                height: 300px;
-                object-fit: cover;
+            
+            .top-video {
+                height: 50vh;
             }
-            .text-block {
-                padding: 25px;
-                margin: 15px;
+            
+            .video-overlay {
+                height: 50vh;
             }
+            
+            .content {
+                padding: 30px 15px;
+            }
+            
             h1 {
                 font-size: 2.2em;
-            }
-            .video-controls {
-                flex-wrap: wrap;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ВАШЕ ЛОКАЛЬНОЕ ВИДЕО В САМОМ ВЕРХУ -->
-    <div class="video-header">
-        <h3 class="video-title">🎬 BeamNG.drive - Showreel Trailer (Ваше видео)</h3>
-        <video id="mainVideo" class="main-video" controls poster="https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?auto=format&fit=crop&w=800&q=80">
-            <source src="BeamNG.drive - Showreel Trailer.mp4" type="video/mp4">
-            Ваш браузер не поддерживает видео. 
-            <a href="BeamNG.drive - Showreel Trailer.mp4" style="color: #FF8C00;">Скачайте видео</a>
-        </video>
-        
-        <div class="video-controls">
-            <button onclick="playPause()">▶️ Воспроизвести/Пауза</button>
-            <button onclick="toggleMute()">🔊 Вкл/Выкл звук</button>
-            <button onclick="toggleFullScreen()">📺 Полный экран</button>
-            <a href="BeamNG.drive - Showreel Trailer.mp4" download style="background: #333; color: white; border: 1px solid #1f9eff; padding: 10px 20px; border-radius: 5px; text-decoration: none;">📥 Скачать видео</a>
+    <!-- ВАШЕ ВИДЕО НА САМОМ ВЕРХУ - ЗАЦИКЛЕННОЕ -->
+    <video class="top-video" autoplay muted loop playsinline>
+        <source src="BeamNG.drive - Showreel Trailer.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+    
+    <!-- Затемнение для читаемости -->
+    <div class="video-overlay"></div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="content">
+        <div class="text-block">
+            <h1>BeamNG<font color="#FFA500">.drive</font></h1>
+
+            <p><strong>Реалистичный симулятор с идеальной физикой.</strong> Машины гнутся, ломаются, ведут себя как в жизни. Бесконечные аварии, моды, песочница. Идеально для краш-тестов и абсурдных экспериментов.</p>
+
+            <h2>🎮 Что ещё интересного в игре:</h2>
+            <ul>
+                <li><strong>Технологическое чудо</strong> — движок soft-body, где каждая деталь машины просчитывается отдельно</li>
+                <li><strong>Реальное повреждение</strong> — вмятины, сломанные оси, оторванные двери, вытекающий бензин</li>
+                <li><strong>Для контент-мейкеров</strong> — встроенный рекордер с замедлением, редактор сценариев для съёмки фильмов</li>
+                <li><strong>Для инженеров</strong> — тонкая настройка узлов (развал-схождение, подвеска), Telemetry API для сбора данных</li>
+                <li><strong>Скрытые пасхалки</strong> — летающие тарелки, секретные локации на картах</li>
+                <li><strong>Кросс-платформенные моды</strong> — машины из Forza, Assetto Corsa</li>
+                <li><strong>Режим «Автомир»</strong> — наблюдайте, как ИИ-машины живут своей жизнью</li>
+                <li><strong>Целые игры внутри игры</strong> — гонки на выживание, паркур, футбол машинами</li>
+            </ul>
+
+            <h2>✅ Плюсы BeamNG.drive:</h2>
+            <ul>
+                <li>Лучшая в мире физика разрушений</li>
+                <li>Полная свобода действий — делай что хочешь</li>
+                <li>Бесконечные моды (тысячи машин, карт, сценариев)</li>
+                <li>Реалистичное вождение с ощущением веса и сцепления</li>
+                <li>Инструмент для творчества — съёмка роликов, создание сценариев</li>
+                <li>Постоянно развивается — разработчики добавляют контент годами</li>
+                <li>Образовательный потенциал — изучение физики, основ ПДД</li>
+                <li>Уникальный геймплей — аналогов с такой детализацией нет</li>
+                <li>ИИ-трафик — живой мир вокруг, можно просто наблюдать</li>
+                <li>Технический восторг — восхищение технологией «мягких тел»</li>
+            </ul>
+
+            <h2>❌ Существенные минусы BeamNG.drive:</h2>
+            <ol>
+                <li><strong>Требовательна к железу</strong> — даже мощные ПК иногда "тормозят"</li>
+                <li><strong>Нет сюжета</strong> — чистая песочница без сценария</li>
+                <li><strong>Сложна для новичков</strong> — тонны настроек и модов</li>
+                <li><strong>Сетевой режим</strong> — только через моды (не официальный)</li>
+                <li><strong>Проблемы с оптимизацией</strong> — зависания на больших картах</li>
+                <li><strong>Сложная установка модов</strong> — репозитории, зависимости</li>
+                <li><strong>Нет лицензионных машин</strong> — все моды фанатские</li>
+                <li><strong>Много багов</strong> в пользовательском контенте</li>
+            </ol>
+
+            <h2>📊 Цифры для впечатления:</h2>
+            <ul>
+                <li><strong>500+</strong> машин в Workshop Steam</li>
+                <li><strong>100+</strong> карт разного масштаба</li>
+                <li><strong>10 лет</strong> разработки (в раннем доступе с 2015)</li>
+                <li><strong>95%</strong> положительных отзывов в Steam</li>
+                <li><strong>Миллионы</strong> фанатов по всему миру</li>
+            </ul>
+
+            <p><em>Философия игры: Это цифровой песочный стол с моделями машин, где ты одновременно и ребёнок, и каскадёр, и инженер-испытатель.</em></p>
+
+            <!-- Кнопка Steam -->
+            <a href="https://store.steampowered.com/app/284160/BeamNG_drive/" target="_blank" class="btn">🎮 Перейти в Steam</a>
         </div>
-    </div>
 
-    <!-- Основной текст -->
-    <div class="text-block">
-        <h1>BeamNG<font color="#FFA500">.drive</font></h1>
-
-        <p><strong>Реалистичный симулятор с идеальной физикой.</strong> Машины гнутся, ломаются, ведут себя как в жизни. Бесконечные аварии, моды, песочница. Идеально для краш-тестов и абсурдных экспериментов.</p>
-
-        <h2>🎮 Что ещё интересного в игре:</h2>
-        <ul>
-            <li><strong>Технологическое чудо</strong> — движок soft-body, где каждая деталь машины просчитывается отдельно</li>
-            <li><strong>Реальное повреждение</strong> — вмятины, сломанные оси, оторванные двери, вытекающий бензин</li>
-            <li><strong>Для контент-мейкеров</strong> — встроенный рекордер с замедлением, редактор сценариев для съёмки фильмов</li>
-            <li><strong>Для инженеров</strong> — тонкая настройка узлов (развал-схождение, подвеска), Telemetry API для сбора данных</li>
-            <li><strong>Скрытые пасхалки</strong> — летающие тарелки, секретные локации на картах</li>
-            <li><strong>Кросс-платформенные моды</strong> — машины из Forza, Assetto Corsa</li>
-            <li><strong>Режим «Автомир»</strong> — наблюдайте, как ИИ-машины живут своей жизнью</li>
-            <li><strong>Целые игры внутри игры</strong> — гонки на выживание, паркур, футбол машинами</li>
-        </ul>
-
-        <h2>✅ Плюсы BeamNG.drive:</h2>
-        <ul>
-            <li>Лучшая в мире физика разрушений</li>
-            <li>Полная свобода действий — делай что хочешь</li>
-            <li>Бесконечные моды (тысячи машин, карт, сценариев)</li>
-            <li>Реалистичное вождение с ощущением веса и сцепления</li>
-            <li>Инструмент для творчества — съёмка роликов, создание сценариев</li>
-            <li>Постоянно развивается — разработчики добавляют контент годами</li>
-            <li>Образовательный потенциал — изучение физики, основ ПДД</li>
-            <li>Уникальный геймплей — аналогов с такой детализацией нет</li>
-            <li>ИИ-трафик — живой мир вокруг, можно просто наблюдать</li>
-            <li>Технический восторг — восхищение технологией «мягких тел»</li>
-        </ul>
-
-        <h2>❌ Существенные минусы BeamNG.drive:</h2>
-        <ol>
-            <li><strong>Требовательна к железу</strong> — даже мощные ПК иногда "тормозят"</li>
-            <li><strong>Нет сюжета</strong> — чистая песочница без сценария</li>
-            <li><strong>Сложна для новичков</strong> — тонны настроек и модов</li>
-            <li><strong>Сетевой режим</strong> — только через моды (не официальный)</li>
-            <li><strong>Проблемы с оптимизацией</strong> — зависания на больших картах</li>
-            <li><strong>Сложная установка модов</strong> — репозитории, зависимости</li>
-            <li><strong>Нет лицензионных машин</strong> — все моды фанатские</li>
-            <li><strong>Много багов</strong> в пользовательском контенте</li>
-        </ol>
-
-        <h2>📊 Цифры для впечатления:</h2>
-        <ul>
-            <li><strong>500+</strong> машин в Workshop Steam</li>
-            <li><strong>100+</strong> карт разного масштаба</li>
-            <li><strong>10 лет</strong> разработки (в раннем доступе с 2015)</li>
-            <li><strong>95%</strong> положительных отзывов в Steam</li>
-            <li><strong>Миллионы</strong> фанатов по всему миру</li>
-        </ul>
-
-        <p><em>Философия игры: Это цифровой песочный стол с моделями машин, где ты одновременно и ребёнок, и каскадёр, и инженер-испытатель.</em></p>
-
-        <!-- Кнопка Steam -->
-        <a href="https://store.steampowered.com/app/284160/BeamNG_drive/" target="_blank" class="btn">🎮 Перейти в Steam</a>
-    </div>
-
-    <!-- YouTube видео ниже -->
-    <div class="video-header">
-        <h3 class="video-title">📺 BeamNG.drive - Official YouTube Trailer</h3>
-        <iframe 
-            src="https://www.youtube.com/embed/4ms-LHkN6YQ" 
-            title="BeamNG.drive - Official Trailer" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen
-            style="width: 100%; height: 560px; border: none; border-radius: 0 0 12px 12px;">
-        </iframe>
-    </div>
-
-    <!-- Доп. видео из Steam (WebM) -->
-    <div class="video-container">
-        <div class="video-item">
-            <video autoplay muted loop playsinline>
-                <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/e32b86262102fcbb1b903f9036351865.webm?t=1765018126" type="video/webm">
-                Ваш браузер не поддерживает видео.
-            </video>
+        <!-- YouTube видео -->
+        <div style="max-width: 1000px; margin: 50px auto;">
+            <h2 style="text-align: center;">📺 Official Trailer</h2>
+            <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.5);">
+                <iframe 
+                    src="https://www.youtube.com/embed/4ms-LHkN6YQ" 
+                    title="BeamNG.drive - Official Trailer" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    style="width: 100%; height: 560px; border: none; display: block;">
+                </iframe>
+            </div>
         </div>
-        <div class="video-item">
-            <video autoplay muted loop playsinline>
-                <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/582c66d693899fbba5344b899c50c681.webm?t=1765018126" type="video/webm">
-                Ваш браузер не поддерживает видео.
-            </video>
-        </div>
-        <div class="video-item">
-            <video autoplay muted loop playsinline>
-                <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/53cfb9a4ce25254fc0ab7c2bf66e52b1.webm?t=1765018126" type="video/webm">
-                Ваш браузер не поддерживает видео.
-            </video>
-        </div>
-    </div>
 
-    <div class="footer">
-        &copy; 2025 | Fan-site BeamNG.drive | Неофициальный ресурс
+        <!-- Доп. видео из Steam (WebM) -->
+        <div class="video-container">
+            <div class="video-item">
+                <video autoplay muted loop playsinline>
+                    <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/e32b86262102fcbb1b903f9036351865.webm?t=1765018126" type="video/webm">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+            <div class="video-item">
+                <video autoplay muted loop playsinline>
+                    <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/582c66d693899fbba5344b899c50c681.webm?t=1765018126" type="video/webm">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+            <div class="video-item">
+                <video autoplay muted loop playsinline>
+                    <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/284160/extras/53cfb9a4ce25254fc0ab7c2bf66e52b1.webm?t=1765018126" type="video/webm">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2025 | Fan-site BeamNG.drive | Неофициальный ресурс
+        </div>
     </div>
 
     <script>
-        const video = document.getElementById('mainVideo');
-        
-        function playPause() {
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        }
-        
-        function toggleMute() {
-            video.muted = !video.muted;
-        }
-        
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                video.requestFullscreen().catch(err => {
-                    console.log(`Ошибка полноэкранного режима: ${err.message}`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
-        }
-        
-        // Автоматическое воспроизведение при загрузке (если браузер разрешает)
-        video.addEventListener('loadeddata', () => {
+        // Автоматический запуск видео
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.top-video');
             video.play().catch(e => {
-                console.log("Автовоспроизведение заблокировано браузером");
+                console.log("Автовоспроизведение заблокировано, но видео будет зациклено");
             });
         });
-        
-        console.log('🚗 BeamNG сайт загружен!');
-        console.log('Ваше видео загружено: BeamNG.drive - Showreel Trailer.mp4');
     </script>
 </body>
 </html>
