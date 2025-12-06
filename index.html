@@ -9,7 +9,7 @@
     <meta property="og:title" content="BeamNG.drive — Идеальная физика в игре">
     <meta property="og:description" content="Машины гнутся, ломаются, ведут себя как в жизни. Смотри видео и переходи в Steam.">
     <meta property="og:image" content="screenshot_2025-10-11_18-50-021.png">
-    <meta property="og:url" content="https://ваше_имя.github.io/beamng">
+    <meta property="og:url" content="https://ivanklib.github.io/beamng-website-try2/">
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- Favicon -->
@@ -36,11 +36,12 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+            background: #000;
         }
-        .video-header iframe {
+        .main-video {
             width: 100%;
-            height: 560px;
-            border: none;
+            height: auto;
+            display: block;
             border-radius: 12px;
         }
         .text-block {
@@ -116,9 +117,45 @@
             color: rgba(255,255,255,0.7);
             font-size: 0.9em;
         }
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 0 0 12px 12px;
+        }
+        .video-controls button {
+            background: #333;
+            color: white;
+            border: 1px solid #FF8C00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Roboto', sans-serif;
+        }
+        .video-controls button:hover {
+            background: #FF8C00;
+            color: black;
+        }
+        .video-title {
+            text-align: center;
+            background: rgba(255,140,0,0.9);
+            color: black;
+            padding: 10px;
+            margin: 0;
+            font-weight: bold;
+            border-radius: 12px 12px 0 0;
+        }
         @media (max-width: 768px) {
-            .video-header iframe {
+            .video-header {
+                margin: 10px;
+            }
+            .main-video {
                 height: 300px;
+                object-fit: cover;
             }
             .text-block {
                 padding: 25px;
@@ -127,20 +164,29 @@
             h1 {
                 font-size: 2.2em;
             }
+            .video-controls {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Главное видео с YouTube в самом верху -->
-    <div class="text-block" style="text-align: center;">
-        <h2>🎬 Мой любимый трейлер BeamNG</h2>
-        <video width="90%" controls style="max-width: 800px; border-radius: 10px; margin: 20px auto; display: block;">
+    <!-- ВАШЕ ЛОКАЛЬНОЕ ВИДЕО В САМОМ ВЕРХУ -->
+    <div class="video-header">
+        <h3 class="video-title">🎬 BeamNG.drive - Showreel Trailer (Ваше видео)</h3>
+        <video id="mainVideo" class="main-video" controls poster="https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?auto=format&fit=crop&w=800&q=80">
             <source src="BeamNG.drive - Showreel Trailer.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео. 
             <a href="BeamNG.drive - Showreel Trailer.mp4" style="color: #FF8C00;">Скачайте видео</a>
         </video>
-        <p style="color: #aaa; font-size: 0.9em;">Скачанный трейлер | MP4 | 1080p</p>
+        
+        <div class="video-controls">
+            <button onclick="playPause()">▶️ Воспроизвести/Пауза</button>
+            <button onclick="toggleMute()">🔊 Вкл/Выкл звук</button>
+            <button onclick="toggleFullScreen()">📺 Полный экран</button>
+            <a href="BeamNG.drive - Showreel Trailer.mp4" download style="background: #333; color: white; border: 1px solid #1f9eff; padding: 10px 20px; border-radius: 5px; text-decoration: none;">📥 Скачать видео</a>
+        </div>
     </div>
 
     <!-- Основной текст -->
@@ -202,6 +248,19 @@
         <a href="https://store.steampowered.com/app/284160/BeamNG_drive/" target="_blank" class="btn">🎮 Перейти в Steam</a>
     </div>
 
+    <!-- YouTube видео ниже -->
+    <div class="video-header">
+        <h3 class="video-title">📺 BeamNG.drive - Official YouTube Trailer</h3>
+        <iframe 
+            src="https://www.youtube.com/embed/4ms-LHkN6YQ" 
+            title="BeamNG.drive - Official Trailer" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            style="width: 100%; height: 560px; border: none; border-radius: 0 0 12px 12px;">
+        </iframe>
+    </div>
+
     <!-- Доп. видео из Steam (WebM) -->
     <div class="video-container">
         <div class="video-item">
@@ -227,6 +286,41 @@
     <div class="footer">
         &copy; 2025 | Fan-site BeamNG.drive | Неофициальный ресурс
     </div>
+
+    <script>
+        const video = document.getElementById('mainVideo');
+        
+        function playPause() {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+        
+        function toggleMute() {
+            video.muted = !video.muted;
+        }
+        
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                video.requestFullscreen().catch(err => {
+                    console.log(`Ошибка полноэкранного режима: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // Автоматическое воспроизведение при загрузке (если браузер разрешает)
+        video.addEventListener('loadeddata', () => {
+            video.play().catch(e => {
+                console.log("Автовоспроизведение заблокировано браузером");
+            });
+        });
+        
+        console.log('🚗 BeamNG сайт загружен!');
+        console.log('Ваше видео загружено: BeamNG.drive - Showreel Trailer.mp4');
+    </script>
 </body>
 </html>
-
